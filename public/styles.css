@@ -108,3 +108,7 @@ form button {
   cursor: pointer;
   outline: none;
 }
+
+.noteIcon {
+  padding-top: 2px;
+}

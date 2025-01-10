@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const CreateNote = (props) => {
   const [note, setNote] = useState({ title: "", content: "" });
+  const [isExpanded, setExpanded] = useState(false);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -22,23 +24,33 @@ const CreateNote = (props) => {
     e.preventDefault();
   }
 
+  function expand() {
+    setExpanded(true);
+  }
+
   return (
     <div>
       <form>
-        <input
-          name="title"
-          onChange={handleChange}
-          value={note.title}
-          placeholder="Note"
-        />
+        {isExpanded && (
+          <input
+            name="title"
+            onChange={handleChange}
+            value={note.title}
+            placeholder="Note"
+          />
+        )}
         <textarea
           name="content"
           onChange={handleChange}
+          onClick={expand}
           value={note.content}
           placeholder="Take a note..."
-          rows="3"
+          rows={isExpanded ? 3 : 1}
         />
-        <button onClick={submitNote}>Add Note</button>
+
+        <button onClick={submitNote}>
+          <AddCircleOutlineIcon />
+        </button>
       </form>
     </div>
   );
